@@ -6,12 +6,24 @@ Key insight: Each row is independent
 """
 def loop_basics(n):
     print("Basic Loop Understanding:")
-    print("Row | Pattern")
+    print("Row ! Pattern")
     print("-" * 15)
-    
+
     for i in range(n):  # i goes from 0 to n-1
         print(f"{i:2d}  | ", end="")
         for j in range(i + 1):  # j goes from 0 to i
             print("*", end="")
         print()  # Move to next line after each row
-loop_basics(100)
+
+loop_basics(5)
+
+def triangle():
+    print("printing the star pattern")
+    print("max of 10 raw")
+    print("-" * 15)
+
+    for i in range(10):
+        for j in range (i+1):
+            print("*", end="")
+        print()
+triangle()

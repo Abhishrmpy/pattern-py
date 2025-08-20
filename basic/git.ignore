@@ -1,0 +1,553 @@
+# FILE: stars/right_triangle.py
+"""
+Logic: Simplest increasing pattern
+Formula: Row i has (i+1) stars
+Pattern builds naturally from left
+"""
+def right_triangle(n):
+    print("Right Triangle Pattern:")
+    
+    for i in range(n):  # i = row number (0 to n-1)
+        # Row i needs (i+1) stars
+        for j in range(i + 1):
+            print("*", end="")
+        print()  # New line after each row
+
+# FILE: stars/left_triangle.py
+"""
+Logic: Right triangle with leading spaces
+Formula: Row i has (n-i-1) spaces + (i+1) stars
+Key: Spaces decrease as stars increase
+"""
+def left_triangle(n):
+    print("Left Triangle Pattern:")
+    
+    for i in range(n):  # i = row number
+        # Print leading spaces: (n-i-1) spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+            
+        # Print stars: (i+1) stars  
+        for j in range(i + 1):
+            print("*", end="")
+        print()
+
+# FILE: stars/pyramid.py
+"""
+Logic: Centered triangle with odd number of stars
+Formula: Row i has (n-i-1) spaces + (2*i+1) stars
+Why 2*i+1? Creates symmetric growth: 1,3,5,7...
+"""
+def pyramid(n):
+    print("Pyramid Pattern:")
+    
+    for i in range(n):  # i = row number
+        # Leading spaces for centering: (n-i-1)
+        for j in range(n - i - 1):
+            print(" ", end="")
+            
+        # Stars in each row: (2*i+1) for symmetry
+        for j in range(2 * i + 1):
+            print("*", end="")
+        print()
+
+# FILE: stars/inverted_pyramid.py  
+"""
+Logic: Upside down pyramid
+Formula: Row i has (i) spaces + (2*(n-i)-1) stars
+Key: Reverse the pyramid logic
+"""
+def inverted_pyramid(n):
+    print("Inverted Pyramid Pattern:")
+    
+    for i in range(n):  # i = row number
+        # Leading spaces: increase with row number
+        for j in range(i):
+            print(" ", end="")
+            
+        # Stars: decrease with row number
+        for j in range(2 * (n - i) - 1):
+            print("*", end="")
+        print()
+
+# FILE: stars/diamond.py
+"""
+Logic: Combination of pyramid + inverted pyramid
+Two parts:
+1. Upper half: pyramid (0 to n-1)  
+2. Lower half: inverted pyramid (1 to n-1) - skip middle row
+"""
+def diamond(n):
+    print("Diamond Pattern:")
+    
+    # Upper half (including middle)
+    for i in range(n):
+        # Spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+        # Stars  
+        for j in range(2 * i + 1):
+            print("*", end="")
+        print()
+    
+    # Lower half (excluding middle row)
+    for i in range(n - 2, -1, -1):  # n-2 down to 0
+        # Spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+        # Stars
+        for j in range(2 * i + 1):
+            print("*", end="")
+        print()
+
+# FILE: stars/square.py
+"""
+Logic: Simplest 2D pattern
+All rows have same number of stars
+Formula: n rows, each with n stars
+"""
+def square(n):
+    print("Square Pattern:")
+    
+    for i in range(n):  # n rows
+        for j in range(n):  # n stars per row
+            print("*", end="")
+        print()
+
+# ===================
+# 3. NUMBERS FOLDER
+# ===================
+
+# FILE: numbers/number_triangle.py
+"""
+Logic: Replace stars with consecutive numbers in each row
+Row i: numbers from 1 to (i+1)
+Key: Inner loop variable becomes the number to print
+"""
+def number_triangle(n):
+    print("Number Triangle Pattern:")
+    
+    for i in range(n):  # Row number
+        for j in range(i + 1):  # j from 0 to i
+            print(j + 1, end="")  # Print number (j+1)
+        print()
+
+# FILE: numbers/number_pyramid.py  
+"""
+Logic: Pyramid shape with numbers
+Combine pyramid spacing + consecutive numbers
+Row i: (n-i-1) spaces + numbers 1 to (2*i+1)
+"""
+def number_pyramid(n):
+    print("Number Pyramid Pattern:")
+    
+    for i in range(n):
+        # Leading spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+            
+        # Numbers: 1 to (2*i+1)
+        for j in range(2 * i + 1):
+            print(j + 1, end="")
+        print()
+
+# FILE: numbers/floyds_triangle.py
+"""
+Logic: Continuous numbering across all rows
+Key insight: Use a counter that persists across rows
+Not row-based numbering, but continuous sequence
+"""
+def floyds_triangle(n):
+    print("Floyd's Triangle Pattern:")
+    
+    num = 1  # Global counter for numbers
+    
+    for i in range(n):  # Row number
+        for j in range(i + 1):  # Numbers in row i
+            print(num, end=" ")
+            num += 1  # Increment for next number
+        print()
+
+# FILE: numbers/pascal_triangle.py
+"""
+Logic: Mathematical pattern - Pascal's triangle
+Each number = sum of two numbers above it
+Formula: C(n,r) = C(n,r-1) * (n-r+1) / r
+"""
+def pascal_triangle(n):
+    print("Pascal's Triangle Pattern:")
+    
+    for i in range(n):  # Row number
+        # Leading spaces for centering
+        for j in range(n - i - 1):
+            print(" ", end="")
+            
+        # Calculate Pascal's triangle values
+        num = 1
+        for j in range(i + 1):
+            print(num, end=" ")
+            # Calculate next number: C(i,j+1) = C(i,j) * (i-j)/(j+1)
+            num = num * (i - j) // (j + 1)
+        print()
+
+# FILE: numbers/palindrome_number.py  
+"""
+Logic: Numbers go up then down (palindrome)
+Row i: ascending 1 to (i+1), then descending i to 1
+Create mirror effect with numbers
+"""
+def palindrome_number(n):
+    print("Palindrome Number Pattern:")
+    
+    for i in range(n):
+        # Leading spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+            
+        # Ascending numbers: 1 to (i+1)
+        for j in range(i + 1):
+            print(j + 1, end="")
+            
+        # Descending numbers: i down to 1
+        for j in range(i, 0, -1):
+            print(j, end="")
+        print()
+
+# ===================
+# 4. ALPHABETS FOLDER
+# ===================
+
+# FILE: alphabets/alphabet_triangle.py
+"""  
+Logic: Replace numbers with letters
+Use ASCII arithmetic: ord('A') + number = letter
+Row i: letters from A to chr(ord('A') + i)
+"""
+def alphabet_triangle(n):
+    print("Alphabet Triangle Pattern:")
+    
+    for i in range(n):  # Row number
+        for j in range(i + 1):  # Letters in row
+            # Convert number to letter: A=0, B=1, C=2...
+            letter = chr(ord('A') + j)
+            print(letter, end="")
+        print()
+
+# FILE: alphabets/alphabet_pyramid.py
+"""
+Logic: Pyramid shape with alphabets
+Combine pyramid spacing + consecutive letters
+"""
+def alphabet_pyramid(n):
+    print("Alphabet Pyramid Pattern:")
+    
+    for i in range(n):
+        # Leading spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+            
+        # Letters: A to chr(ord('A') + 2*i)
+        for j in range(2 * i + 1):
+            letter = chr(ord('A') + j)
+            print(letter, end="")
+        print()
+
+# FILE: alphabets/alphabet_diamond.py
+"""
+Logic: Diamond shape with alphabets  
+Same structure as star diamond, different content
+"""
+def alphabet_diamond(n):
+    print("Alphabet Diamond Pattern:")
+    
+    # Upper half
+    for i in range(n):
+        # Spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+        # Letters
+        for j in range(2 * i + 1):
+            letter = chr(ord('A') + j)
+            print(letter, end="")
+        print()
+    
+    # Lower half  
+    for i in range(n - 2, -1, -1):
+        # Spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+        # Letters
+        for j in range(2 * i + 1):
+            letter = chr(ord('A') + j)
+            print(letter, end="")
+        print()
+
+# ===================
+# 5. ADVANCED FOLDER
+# ===================
+
+# FILE: advanced/hollow_square.py
+"""
+Logic: Square with only border filled
+Key insight: Print star only at borders
+Border condition: first/last row OR first/last column
+"""
+def hollow_square(n):
+    print("Hollow Square Pattern:")
+    
+    for i in range(n):  # Row number
+        for j in range(n):  # Column number
+            # Border condition: edges of square
+            if i == 0 or i == n-1 or j == 0 or j == n-1:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()
+
+# FILE: advanced/hollow_triangle.py  
+"""
+Logic: Triangle with only border filled
+Border condition: first row OR last row OR edges of triangle
+"""
+def hollow_triangle(n):
+    print("Hollow Triangle Pattern:")
+    
+    for i in range(n):  # Row number
+        # Leading spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+            
+        # Triangle content with hollow logic
+        for j in range(2 * i + 1):
+            # Border condition for triangle
+            if i == n-1 or j == 0 or j == 2*i:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()
+
+# FILE: advanced/hollow_diamond.py
+"""
+Logic: Diamond with only border filled  
+Combine hollow logic with diamond structure
+"""
+def hollow_diamond(n):
+    print("Hollow Diamond Pattern:")
+    
+    # Upper half
+    for i in range(n):
+        # Spaces
+        for j in range(n - i - 1):
+            print(" ", end="")
+        # Diamond content
+        for j in range(2 * i + 1):
+            if j == 0 or j == 2*i:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()
+    
+    # Lower half
+    for i in range(n - 2, -1, -1):
+        # Spaces  
+        for j in range(n - i - 1):
+            print(" ", end="")
+        # Diamond content
+        for j in range(2 * i + 1):
+            if j == 0 or j == 2*i:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()
+
+# FILE: advanced/butterfly_pattern.py
+"""
+Logic: Two triangles facing each other with gap in middle
+Structure: Left wing + Gap + Right wing
+Wings are symmetric, gap size changes per row
+"""
+def butterfly_pattern(n):
+    print("Butterfly Pattern:")
+    
+    # Upper half
+    for i in range(n):
+        # Left wing: (i+1) stars
+        for j in range(i + 1):
+            print("*", end="")
+            
+        # Middle gap: 2*(n-i-1) spaces
+        for j in range(2 * (n - i - 1)):
+            print(" ", end="")
+            
+        # Right wing: (i+1) stars
+        for j in range(i + 1):
+            print("*", end="")
+        print()
+    
+    # Lower half (mirror of upper)
+    for i in range(n - 2, -1, -1):
+        # Left wing
+        for j in range(i + 1):
+            print("*", end="")
+        # Gap
+        for j in range(2 * (n - i - 1)):
+            print(" ", end="")
+        # Right wing  
+        for j in range(i + 1):
+            print("*", end="")
+        print()
+
+# FILE: advanced/zigzag_pattern.py
+"""
+Logic: Wave pattern using mathematical formula
+Key: Determine star position using sine wave concept
+Position varies in a zigzag manner across rows
+"""
+def zigzag_pattern(rows, cols):
+    print("Zigzag Pattern:")
+    
+    for i in range(rows):  # Row number
+        for j in range(cols):  # Column number
+            # Zigzag formula: creates wave effect
+            # Star appears at calculated position per row
+            star_pos = abs(i % (2 * cols - 2) - j)
+            if star_pos == 0 or star_pos == cols - 1:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()
+
+# ===================
+# 6. MISC FOLDER  
+# ===================
+
+# FILE: misc/checkerboard.py
+"""
+Logic: Alternating pattern like chess board
+Key insight: (row + column) sum determines color
+Even sum = one character, Odd sum = another character
+"""
+def checkerboard(n):
+    print("Checkerboard Pattern:")
+    
+    for i in range(n):  # Row number
+        for j in range(n):  # Column number
+            # Alternating logic using sum
+            if (i + j) % 2 == 0:
+                print("■", end="")  # Black square
+            else:
+                print("□", end="")  # White square
+        print()
+
+# FILE: misc/spiral_numbers.py  
+"""
+Logic: Fill matrix in spiral order (clockwise)
+Direction sequence: Right → Down → Left → Up → repeat
+Track boundaries and change direction when needed
+"""
+def spiral_numbers(n):
+    print("Spiral Numbers Pattern:")
+    
+    # Create 2D matrix
+    matrix = [[0] * n for _ in range(n)]
+    
+    # Direction vectors: right, down, left, up
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    direction_idx = 0
+    
+    row, col = 0, 0
+    
+    for num in range(1, n * n + 1):
+        matrix[row][col] = num
+        
+        # Calculate next position
+        next_row = row + directions[direction_idx][0]
+        next_col = col + directions[direction_idx][1]
+        
+        # Check if need to change direction
+        if (next_row < 0 or next_row >= n or 
+            next_col < 0 or next_col >= n or 
+            matrix[next_row][next_col] != 0):
+            # Change direction
+            direction_idx = (direction_idx + 1) % 4
+            next_row = row + directions[direction_idx][0]  
+            next_col = col + directions[direction_idx][1]
+        
+        row, col = next_row, next_col
+    
+    # Print the spiral
+    for i in range(n):
+        for j in range(n):
+            print(f"{matrix[i][j]:2d}", end=" ")
+        print()
+
+# FILE: misc/heart_pattern.py
+"""
+Logic: Mathematical heart shape using coordinate geometry
+Heart equation: (x^2 + y^2 - 1)^3 - x^2*y^3 <= 0
+Plot heart by checking each coordinate point
+"""
+def heart_pattern():
+    print("Heart Pattern:")
+    
+    # Heart dimensions
+    for row in range(6, -7, -1):  # y coordinates from 6 to -6
+        for col in range(-7, 8):  # x coordinates from -7 to 7
+            # Normalize coordinates
+            x = col * 0.5
+            y = row * 0.5
+            
+            # Heart equation: creates heart shape
+            # Mathematical formula for heart curve
+            heart_eq = ((x*x + y*y - 1)**3) - (x*x * y*y*y)
+            
+            if heart_eq <= 0:
+                print("♥", end="")
+            else:
+                print(" ", end="")
+        print()
+
+# ===================
+# MAIN DEMONSTRATION  
+# ===================
+
+if __name__ == "__main__":
+    # Test all patterns with size 5
+    n = 5
+    
+    print("=" * 50)
+    print("PATTERN PROGRAMMING DEMONSTRATION")
+    print("=" * 50)
+    
+    # Basics
+    hello_world()
+    print("\n" + "-" * 30 + "\n")
+    loop_basics(n)
+    print("\n" + "-" * 30 + "\n")
+    
+    # Stars  
+    right_triangle(n)
+    print("\n" + "-" * 30 + "\n")
+    left_triangle(n)
+    print("\n" + "-" * 30 + "\n")
+    pyramid(n)
+    print("\n" + "-" * 30 + "\n")
+    diamond(n)
+    print("\n" + "-" * 30 + "\n")
+    
+    # Numbers
+    number_triangle(n)
+    print("\n" + "-" * 30 + "\n")
+    floyds_triangle(n)
+    print("\n" + "-" * 30 + "\n")
+    
+    # Advanced
+    hollow_square(n)
+    print("\n" + "-" * 30 + "\n")
+    butterfly_pattern(n)
+    print("\n" + "-" * 30 + "\n")
+    
+    # Misc
+    checkerboard(4)
+    print("\n" + "-" * 30 + "\n")
+    heart_pattern()
