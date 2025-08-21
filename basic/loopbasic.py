@@ -17,6 +17,7 @@ def loop_basics(n):
 
 loop_basics(5)
 
+#another way of printing start with the same logic 
 def triangle():
     print("printing the star pattern")
     print("max of 10 raw")
